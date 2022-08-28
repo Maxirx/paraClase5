@@ -22,16 +22,15 @@ class Usuario {
     }
 }
 
-class Adminis extends Usuario {
-    constructor(nombre, apellido, email, password, rol) {
-        super(nombre, apellido, email, password, rol)
-        this.admin = rol == 1 ? true : false
-    }
-    esAdmin() {
-        this.admin === true ? console.log("Sesion iniciada como Administrador") : this.admin = false;
-    }
-}
-
+// class Adminis extends Usuario {
+//     constructor(nombre, apellido, email, password, rol) {
+//         super(nombre, apellido, email, password, rol)
+//         this.admin = rol == 1 ? true : false
+//     }
+//     esAdmin() {
+//         this.admin === true ? console.log("Sesion iniciada como Administrador") : this.admin = false;
+//     }
+// }
 
 function verificacion(campoAVerificar, nombreCampoForm) {
 
@@ -69,9 +68,9 @@ function crearUsuario() {
     console.log(rol);
 
     usuarioNuevo = new Usuario(nombre, apellido, email, password, rol)
-    console.log(usuarioNuevo);
-    usuarioAdminis = new Adminis(nombre, apellido, email, password, rol)
-    console.log(usuarioAdminis);
+    console.table(usuarioNuevo);
+    // usuarioAdminis = new Adminis(nombre, apellido, email, password, rol)
+    // console.table(usuarioAdminis);
 
     console.log("usuario creado");
     return usuarioNuevo
@@ -80,7 +79,7 @@ function crearUsuario() {
 function iniciarSesion() {
     let email = prompt("ingrese email").trim().toLowerCase()
     let contra = prompt("ingrese contraseña").trim().toLowerCase()
-    console.log(usuarioNuevo);
+    console.table(usuarioNuevo);
 
     if (usuarioNuevo != false) {
 
@@ -105,7 +104,7 @@ function opcionesSesion() {
                 break
             case 1:
                 iniciarSesion()
-                usuarioAdminis.esAdmin()
+                // usuarioAdminis.esAdmin()
                 break
             case 0:
                 console.log("gracias por usar nuestros servicios");
