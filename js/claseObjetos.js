@@ -42,6 +42,7 @@ function crearUsuario() {
     let usuarioNuevo = new Usuario(nombre, apellido, email, contraseña, rol)
     console.log(usuarioNuevo);
     arrayDeUsuarios.push(usuarioNuevo)
+    console.log(arrayDeUsuarios);
     usuarioNuevo = ""
     console.log("usuario creado");
     return arrayDeUsuarios
