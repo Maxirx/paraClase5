@@ -52,7 +52,7 @@ function crearUsuario() {
     let rol = email.includes("admin") ? 1 : 2
     console.log(rol);
     let usuarioNuevo = new Usuario(nombre, apellido, email, contraseña, rol)
-    console.log(usuarioNuevo);
+    console.table(usuarioNuevo);
     usuarioAdminis = new Adminis(nombre, apellido, email, contraseña, rol)
     console.table(usuarioAdminis);
     arrayDeUsuarios.push(usuarioAdminis)
@@ -103,8 +103,7 @@ function opcionesSesion() {
                 break
             case 1:
                 iniciarSesion()
-                console.log(arrayDeUsuarios);
-                console.log(arrayDeAdminis.length);
+
 
                 break
             case 0:
