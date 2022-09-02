@@ -1,4 +1,6 @@
 var arrayDeUsuarios = [];
+var arrayDeAdminis = [];
+
 class Usuario {
     constructor(nombre, apellido, email, contraseña, rol) {
         this.nombre = nombre
@@ -21,6 +23,16 @@ class Usuario {
 }
 
 
+class Adminis extends Usuario {
+    constructor(nombre, apellido, email, password, rol) {
+        super(nombre, apellido, email, password, rol)
+        this.admin = rol == 1 ? true : false
+    }
+    esAdmin() {
+        this.admin === true ? console.log("Sesion iniciada como Administrador") : this.admin = false;
+    }
+}
+
 function verificacion(campoAVerificar) {
 
     campoAVerificar = prompt("cual es tu " + campoAVerificar + "?").trim().toLowerCase()
@@ -41,8 +53,12 @@ function crearUsuario() {
     console.log(rol);
     let usuarioNuevo = new Usuario(nombre, apellido, email, contraseña, rol)
     console.log(usuarioNuevo);
-    arrayDeUsuarios.push(usuarioNuevo)
+    usuarioAdminis = new Adminis(nombre, apellido, email, contraseña, rol)
+    console.table(usuarioAdminis);
+    arrayDeUsuarios.push(usuarioAdminis)
+
     console.log(arrayDeUsuarios);
+    console.log(arrayDeAdminis);
     usuarioNuevo = ""
     console.log("usuario creado");
     return arrayDeUsuarios
@@ -56,8 +72,16 @@ function iniciarSesion() {
     if (arrayDeUsuarios != false) {
         for (let i = 0; i < arrayDeUsuarios.length; i++) {
             inicio = arrayDeUsuarios[i].inicioSesion(email, contra);
+
+
             if (inicio === true) {
-                return inicio
+                if (arrayDeUsuarios[i].rol === 1) {
+                    inicio = arrayDeUsuarios[i].esAdmin()
+                    return inicio
+                } else {
+                    return inicio
+                }
+
             }
         }
     } else {
@@ -79,6 +103,8 @@ function opcionesSesion() {
                 break
             case 1:
                 iniciarSesion()
+                console.log(arrayDeUsuarios);
+                console.log(arrayDeAdminis.length);
 
                 break
             case 0:
@@ -92,6 +118,4 @@ function opcionesSesion() {
 
     } while (valor !== 0 || valor === null)
 }
-
-
-opcionesSesion()
+setTimeout(() => opcionesSesion(), 2000)

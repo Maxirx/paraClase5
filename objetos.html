@@ -5,10 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styleObjetos.css">
     <title>Document</title>
 </head>
 
-<body>
+<body class="flex">
+    <div class="flex redondeado" id="fondo">
+        <div class="flex" id="imagen">
+            <img src="https://i.pinimg.com/564x/4b/32/e3/4b32e380b64e3b1287ac70afbcf99cfd.jpg" alt="mujer en montaña"
+                class="redondeado">
+        </div>
+        <section class="flex" id="seccion">
+            <header class="redondo">
+                <h1>Registrate!</h1>
+            </header>
+
+            <div class=" flex redondo" id="slice">
+                <div class="redondo flex log">Login</div>
+                <div class="redondo flex log">Registro</div>
+            </div>
+            <div class="flex" id="formulario">
+                <p>Bienvenido a nuestra pagina. Podes registrarte abajo!</p>
+                <form class="flex" action="">
+
+                    <label class="espacio" for="nombre">Nombre</label>
+                    <input class="redondo bordesVerdes" type="text" id="nombre">
+                    <label class="espacio" for="apellido">Apellido</label>
+                    <input class="redondo bordesVerdes" type="text" id="apellido">
+                    <label class="espacio" id="espacio" for="email">Direccion de email</label>
+                    <input class="redondo bordesVerdes" type="email" id="email">
+                    <label class="espacio" for="contra">Contraseña</label>
+                    <input class="redondo bordesVerdes" type="email" id="contra">
+                    <button type="submit" class="redondo bordesVerdes" id="boton">Registro</button>
+                </form>
+            </div>
+        </section>
+    </div>
     <script src="./js/claseObjetos.js"></script>
 </body>
 
