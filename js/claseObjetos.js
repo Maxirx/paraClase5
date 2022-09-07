@@ -52,7 +52,7 @@ function crearUsuario() {
     let rol = email.includes("admin") ? 1 : 2
     console.log(rol);
     let usuarioNuevo = new Usuario(nombre, apellido, email, contraseña, rol)
-    console.table(usuarioNuevo);
+    console.log(usuarioNuevo.nombre);
     usuarioAdminis = new Adminis(nombre, apellido, email, contraseña, rol)
     console.table(usuarioAdminis);
     arrayDeUsuarios.push(usuarioAdminis)
@@ -91,19 +91,39 @@ function iniciarSesion() {
 
 }
 
+function cambiarContraseña() {
+    let email = prompt("ingrese email").trim().toLowerCase()
+    let contra = prompt("ingrese contraseña").trim().toLowerCase()
+    console.log(arrayDeUsuarios[0]);
+    let arrayNuevo = arrayDeUsuarios.find(x => x.email.includes(email))
+    if (arrayNuevo === undefined) {
+        console.log("no existe un usuario con ese correo");
+    } else {
+        console.log(arrayNuevo.contraseña);
+        arrayNuevo.contraseña = contra
+        console.log("contraseña cambiada");
+        console.log(arrayNuevo);
+    }
+
+}
+
 
 
 function opcionesSesion() {
     do {
-        valor = Number(prompt("que operacion queres hacer?\n 2. registrarse \n 1.Iniciar Sesion \n  0. Salir"))
+        valor = Number(prompt("que operacion queres hacer?\n 3. registrarse \n 2.Iniciar Sesion \n1.Cambiar contraseña \n  0. Salir"))
         switch (valor) {
-            case 2:
+            case 3:
                 crearUsuario()
 
                 break
-            case 1:
+            case 2:
                 iniciarSesion()
 
+
+                break
+            case 1:
+                cambiarContraseña()
 
                 break
             case 0:
