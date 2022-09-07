@@ -111,7 +111,7 @@ function cambiarContraseña() {
 
 function opcionesSesion() {
     do {
-        valor = Number(prompt("que operacion queres hacer?\n 3. registrarse \n 2.Iniciar Sesion \n1.Cambiar contraseña \n  0. Salir"))
+        valor = Number(prompt("que operacion queres hacer?\n 3. registrarse \n 2.Iniciar Sesion \n 1.Cambiar contraseña \n  0. Salir"))
         switch (valor) {
             case 3:
                 crearUsuario()
