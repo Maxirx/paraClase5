@@ -1,19 +1,24 @@
 var arrayDeUsuarios = [];
 var arrayDeAdminis = [];
+var preStorage = []
 
 class Usuario {
-    constructor(nombre, apellido, email, contraseña, rol) {
+    constructor(id, nombre, apellido, email, contraseña, rol) {
+        this.id = id
         this.nombre = nombre
         this.apellido = apellido
         this.email = email
         this.contraseña = contraseña
         this.rol = rol
     }
+    calcularIdUsuarios() {
 
+    }
     inicioSesion(email, contraseña) {
 
         if (email === this.email && contraseña === this.contraseña) {
             console.log("sesion iniciada");
+
             return true
         } else {
             console.log("usuario o contraseña erroneos");
@@ -24,8 +29,8 @@ class Usuario {
 
 
 class Adminis extends Usuario {
-    constructor(nombre, apellido, email, password, rol) {
-        super(nombre, apellido, email, password, rol)
+    constructor(id, nombre, apellido, email, password, rol) {
+        super(id, nombre, apellido, email, password, rol)
         this.admin = rol == 1 ? true : false
     }
     esAdmin() {
@@ -33,28 +38,49 @@ class Adminis extends Usuario {
     }
 }
 
-function verificacion(campoAVerificar) {
+function verificacion(campoAVerificar, nombreCampoForm) {
 
-    campoAVerificar = prompt("cual es tu " + campoAVerificar + "?").trim().toLowerCase()
-    campoAVerificar ? campoAVerificar : campoAVerificar = prompt("ingresa  tu " + campoAVerificar).trim().toLowerCase()
+
+    campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
+    campoAVerificar !== null ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
+
+    while (campoAVerificar === false) {
+        alert("no podes dejar campos en blanco");
+        campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
+        campoAVerificar ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
+
+    }
     return campoAVerificar
 }
 
 function crearUsuario() {
-    let nombre = "nombre"
-    nombre = verificacion(nombre)
-    let apellido = "apellido"
-    apellido = verificacion(apellido)
-    let email = "email"
-    email = verificacion(email)
-    let contraseña = "contraseña"
-    contraseña = verificacion(contraseña)
+    let campo1 = "nombre"
+    nombre = verificacion(nombre, campo1)
+
+    let campo2 = "apellido"
+    apellido = verificacion(apellido, campo2)
+
+    let campo3 = "email";
+    let email;
+    email = verificacion(email, campo3)
+
+    let campo4 = "contraseña"
+    let contraseña;
+    contraseña = verificacion(contraseña, campo4)
+
     let rol = email.includes("admin") ? 1 : 2
     console.log(rol);
-    let usuarioNuevo = new Usuario(nombre, apellido, email, contraseña, rol)
+
+    let id = arrayDeUsuarios.length + 1
+
+    let usuarioNuevo = new Usuario(id, nombre, apellido, email, contraseña, rol)
+
     console.log(usuarioNuevo.nombre);
-    usuarioAdminis = new Adminis(nombre, apellido, email, contraseña, rol)
+
+    usuarioAdminis = new Adminis(id, nombre, apellido, email, contraseña, rol)
+
     console.table(usuarioAdminis);
+
     arrayDeUsuarios.push(usuarioAdminis)
 
     console.log(arrayDeUsuarios);
@@ -72,7 +98,8 @@ function iniciarSesion() {
     if (arrayDeUsuarios != false) {
         for (let i = 0; i < arrayDeUsuarios.length; i++) {
             inicio = arrayDeUsuarios[i].inicioSesion(email, contra);
-
+            inicio ? preStorage.push(arrayDeUsuarios[i].id) : null
+            console.log(preStorage);
 
             if (inicio === true) {
                 if (arrayDeUsuarios[i].rol === 1) {
@@ -94,17 +121,25 @@ function iniciarSesion() {
 function cambiarContraseña() {
     let email = prompt("ingrese email").trim().toLowerCase()
     let contra = prompt("ingrese contraseña").trim().toLowerCase()
-    console.log(arrayDeUsuarios[0]);
-    let arrayNuevo = arrayDeUsuarios.find(x => x.email.includes(email))
+    console.log(arrayDeUsuarios[0].id);
+    console.log(preStorage[0]);
+    let arrayNuevo = arrayDeUsuarios.find(x => x.id === preStorage[0])
+    console.log(arrayNuevo);
     if (arrayNuevo === undefined) {
         console.log("no existe un usuario con ese correo");
     } else {
-        console.log(arrayNuevo.contraseña);
-        arrayNuevo.contraseña = contra
-        console.log("contraseña cambiada");
-        console.log(arrayNuevo);
-    }
 
+
+        if (arrayNuevo.contraseña === contra) {
+            let nuevaContra = prompt("ingrese su NUEVA contraseña").trim().toLowerCase()
+            arrayNuevo.contraseña = nuevaContra
+            console.log("contraseña cambiada");
+            console.log(arrayNuevo);
+        } else {
+            console.log("su contraseña no coincide");
+        }
+
+    }
 }
 
 
