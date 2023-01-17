@@ -44,7 +44,7 @@ function verificacion(campoAVerificar, nombreCampoForm) {
     campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
     campoAVerificar !== null ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
 
-    while (campoAVerificar === false) {
+    while (campoAVerificar == false || campoAVerificar === " ") {
         alert("no podes dejar campos en blanco");
         campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
         campoAVerificar ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
@@ -126,7 +126,7 @@ function cambiarContraseña() {
     let arrayNuevo = arrayDeUsuarios.find(x => x.id === preStorage[0])
     console.log(arrayNuevo);
     if (arrayNuevo === undefined) {
-        console.log("no existe un usuario con ese correo");
+        console.log("inicie sesion para cambiar la contraseña");
     } else {
 
 
@@ -163,7 +163,7 @@ function opcionesSesion() {
                 break
             case 0:
                 console.log("gracias por usar nuestros servicios");
-                calor = 0
+
                 break
             default:
                 console.log("seleccione una opcion");

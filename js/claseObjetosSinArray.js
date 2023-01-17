@@ -48,45 +48,45 @@ function verificacion(campoAVerificar, nombreCampoForm) {
 
 function crearUsuario() {
 
-    let primerCampo = "nombre";
-    let nombre;
+    let primerCampo = "nombre"
+    let nombre
     nombre = verificacion(nombre, primerCampo)
 
     let segundoCampo = "apellido"
-    let apellido;
+    let apellido
     apellido = verificacion(apellido, segundoCampo)
 
     let tercerCampo = "email"
-    let email;
+    let email
     email = verificacion(email, tercerCampo)
 
     let cartoCampo = "password"
-    let password;
+    let password
     password = verificacion(password, cartoCampo)
 
     let rol = email.includes("admin") ? 1 : 2
-    console.log(rol);
+    console.log(rol)
 
     usuarioNuevo = new Usuario(nombre, apellido, email, password, rol)
-    console.table(usuarioNuevo);
+    console.table(usuarioNuevo)
     // usuarioAdminis = new Adminis(nombre, apellido, email, password, rol)
-    // console.table(usuarioAdminis);
+    // console.table(usuarioAdminis) 
 
-    console.log("usuario creado");
+    console.log("usuario creado")
     return usuarioNuevo
 }
 
 function iniciarSesion() {
     let email = prompt("ingrese email").trim().toLowerCase()
     let contra = prompt("ingrese contraseña").trim().toLowerCase()
-    console.table(usuarioNuevo);
+    console.table(usuarioNuevo)
 
     if (usuarioNuevo != false) {
 
         usuarioNuevo.inicioSesion(email, contra)
 
     } else {
-        console.log("no hay usuarios registrados en el sistema");
+        console.log("no hay usuarios registrados en el sistema")
         return false
     }
 
@@ -107,11 +107,11 @@ function opcionesSesion() {
                 // usuarioAdminis.esAdmin()
                 break
             case 0:
-                console.log("gracias por usar nuestros servicios");
+                console.log("gracias por usar nuestros servicios")
                 calor = 0
                 break
             default:
-                console.log("seleccione una opcion");
+                console.log("seleccione una opcion")
                 break
         }
 
