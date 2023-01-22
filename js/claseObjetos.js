@@ -14,16 +14,15 @@ class Usuario {
     calcularIdUsuarios() {
 
     }
-    inicioSesion(email, contraseña) {
+    inicioSesion(mail, contraseña) {
 
-        if (email === this.email && contraseña === this.contraseña) {
-            console.log("sesion iniciada");
-
-            return true
-        } else {
+        if (mail !== this.email || contraseña !== this.contraseña) {
             console.log("usuario o contraseña erroneos");
             return false
         }
+        console.log(`bienvenido otra vez ${this.nombre}`);
+        return true
+
     }
 }
 

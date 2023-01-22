@@ -12,13 +12,13 @@ class Usuario {
 
     inicioSesion(mail, contraseña) {
 
-        if (mail === this.email && contraseña === this.password) {
-            console.log("sesion iniciada");
-            return true
-        } else {
+        if (mail !== this.email && contraseña !== this.password) {
             console.log("usuario o contraseña erroneos");
             return false
         }
+
+        console.log(`bienvenido otra vez ${this.nombre}`);
+        return true
     }
 }
 
