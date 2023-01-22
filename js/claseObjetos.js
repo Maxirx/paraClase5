@@ -16,7 +16,7 @@ class Usuario {
     }
     inicioSesion(mail, contraseña) {
 
-        if (mail !== this.email || contraseña !== this.contraseña) {
+        if (mail !== this.email || contraseña !== this.contraseña) { /// si no es incorrecto
             console.log("usuario o contraseña erroneos");
             return false
         }
