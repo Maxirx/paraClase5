@@ -1,5 +1,5 @@
 
-/* let usuarioNuevo = "" */
+let usuarioNuevo = ""
 let usuarioAdminis
 class Usuario {
     constructor(nombre, apellido, email, password, rol) {
@@ -10,7 +10,7 @@ class Usuario {
         this.rol = rol
     }
 
-    crearUsuario() {
+    static crearUsuario() {
 
 
         let primerCampo = "nombre"
@@ -42,8 +42,8 @@ class Usuario {
     }
 
     inicioSesion(mail, contraseña) {
-
-        if (mail !== this.email && contraseña !== this.password) {
+        console.log(mail !== this.email || contraseña !== this.password);
+        if (mail !== this.email || contraseña !== this.password) {
             console.log("usuario o contraseña erroneos");
             return false
         }
@@ -52,7 +52,7 @@ class Usuario {
         return true
     }
 
-    verificacion(campoAVerificar, nombreCampoForm) {
+    static verificacion(campoAVerificar, nombreCampoForm) {
 
         campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
         campoAVerificar !== null ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
@@ -66,15 +66,16 @@ class Usuario {
         return campoAVerificar
     }
 
-    iniciarSesion() {
+    static iniciarSesion() {
+        let verifica
         let email = prompt("ingrese email").trim().toLowerCase()
         let contra = prompt("ingrese contraseña").trim().toLowerCase()
         console.table(usuarioNuevo)
 
-        if (usuarioNuevo != false) {
+        if (usuarioNuevo.nombre != undefined) {
 
-            this.inicioSesion(email, contra)
-
+            verifica = usuarioNuevo.inicioSesion(email, contra)
+            return verifica
         } else {
             console.log("no hay usuarios registrados en el sistema")
             return false
@@ -97,22 +98,26 @@ class Adminis extends Usuario {
 
 
 
-const usuarioNuevo = new Usuario // INSTANCIAMOS AQUI 
-
+/* usuarioNuevo = new Usuario // INSTANCIAMOS AQUI  */
 function opcionesSesion() {
+    let valor
+    let verifica
     do {
         valor = Number(prompt("que operacion queres hacer?\n 2. registrarse \n 1.Iniciar Sesion \n  0. Salir"))
         switch (valor) {
             case 2:
-                usuarioNuevo.crearUsuario()
+                usuarioNuevo = Usuario.crearUsuario()
                 console.table(usuarioNuevo)
 
 
                 break
             case 1:
-                usuarioNuevo.iniciarSesion()
+                verifica = Usuario.iniciarSesion()
+                console.log(verifica);
+                if (verifica) {
 
-                usuarioAdminis.esAdmin()
+                    usuarioAdminis.esAdmin()
+                }
                 break
             case 0:
                 console.log("gracias por usar nuestros servicios")
