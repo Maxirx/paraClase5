@@ -32,17 +32,17 @@ class Usuario {
         let rol = email.includes("admin") ? 1 : 2
         console.log(rol)
 
-        let usuarioNuevo = new Usuario(nombre, apellido, email, password, rol)
+        let usuarioNuevoLocal = new Usuario(nombre, apellido, email, password, rol)
 
         usuarioAdminis = new Adminis(nombre, apellido, email, password, rol)
         console.table(usuarioAdminis)
 
         console.log("usuario creado")
-        return usuarioNuevo
+        return usuarioNuevoLocal
     }
 
     inicioSesion(mail, contraseña) {
-        console.log(mail !== this.email || contraseña !== this.password);
+
         if (mail !== this.email || contraseña !== this.password) {
             console.log("usuario o contraseña erroneos");
             return false
@@ -98,7 +98,7 @@ class Adminis extends Usuario {
 
 
 
-/* usuarioNuevo = new Usuario // INSTANCIAMOS AQUI  */
+
 function opcionesSesion() {
     let valor
     let verifica
