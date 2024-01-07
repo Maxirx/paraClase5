@@ -1,6 +1,6 @@
 
-let usuarioNuevo = ""
-let usuarioAdminis = ""
+/* let usuarioNuevo = "" */
+let usuarioAdminis
 class Usuario {
     constructor(nombre, apellido, email, password, rol) {
         this.nombre = nombre
@@ -8,6 +8,37 @@ class Usuario {
         this.email = email
         this.password = password
         this.rol = rol
+    }
+
+    crearUsuario() {
+
+
+        let primerCampo = "nombre"
+        let nombre
+        nombre = this.verificacion(nombre, primerCampo)
+
+        let segundoCampo = "apellido"
+        let apellido
+        apellido = this.verificacion(apellido, segundoCampo)
+
+        let tercerCampo = "email"
+        let email
+        email = this.verificacion(email, tercerCampo)
+
+        let cartoCampo = "password"
+        let password
+        password = this.verificacion(password, cartoCampo)
+
+        let rol = email.includes("admin") ? 1 : 2
+        console.log(rol)
+
+        let usuarioNuevo = new Usuario(nombre, apellido, email, password, rol)
+
+        usuarioAdminis = new Adminis(nombre, apellido, email, password, rol)
+        console.table(usuarioAdminis)
+
+        console.log("usuario creado")
+        return usuarioNuevo
     }
 
     inicioSesion(mail, contraseña) {
@@ -20,95 +51,72 @@ class Usuario {
         console.log(`bienvenido otra vez ${this.nombre}`);
         return true
     }
-}
 
-// class Adminis extends Usuario {
-//     constructor(nombre, apellido, email, password, rol) {
-//         super(nombre, apellido, email, password, rol)
-//         this.admin = rol == 1 ? true : false
-//     }
-//     esAdmin() {
-//         this.admin === true ? console.log("Sesion iniciada como Administrador") : this.admin = false;
-//     }
-// }
+    verificacion(campoAVerificar, nombreCampoForm) {
 
-function verificacion(campoAVerificar, nombreCampoForm) {
-
-    campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
-    campoAVerificar !== null ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
-
-    while (campoAVerificar === false) {
-        alert("no podes dejar campos en blanco");
         campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
-        campoAVerificar ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
+        campoAVerificar !== null ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
 
+        while (campoAVerificar === false) {
+            alert("no podes dejar campos en blanco");
+            campoAVerificar = prompt("cual es tu " + nombreCampoForm + "?")
+            campoAVerificar ? campoAVerificar.trim().toLowerCase() : campoAVerificar = false
+
+        }
+        return campoAVerificar
     }
-    return campoAVerificar
-}
 
-function crearUsuario() {
+    iniciarSesion() {
+        let email = prompt("ingrese email").trim().toLowerCase()
+        let contra = prompt("ingrese contraseña").trim().toLowerCase()
+        console.table(usuarioNuevo)
 
-    let primerCampo = "nombre"
-    let nombre
-    nombre = verificacion(nombre, primerCampo)
+        if (usuarioNuevo != false) {
 
-    let segundoCampo = "apellido"
-    let apellido
-    apellido = verificacion(apellido, segundoCampo)
+            this.inicioSesion(email, contra)
 
-    let tercerCampo = "email"
-    let email
-    email = verificacion(email, tercerCampo)
+        } else {
+            console.log("no hay usuarios registrados en el sistema")
+            return false
+        }
 
-    let cartoCampo = "password"
-    let password
-    password = verificacion(password, cartoCampo)
-
-    let rol = email.includes("admin") ? 1 : 2
-    console.log(rol)
-
-    usuarioNuevo = new Usuario(nombre, apellido, email, password, rol)
-    console.table(usuarioNuevo)
-    // usuarioAdminis = new Adminis(nombre, apellido, email, password, rol)
-    // console.table(usuarioAdminis) 
-
-    console.log("usuario creado")
-    return usuarioNuevo
-}
-
-function iniciarSesion() {
-    let email = prompt("ingrese email").trim().toLowerCase()
-    let contra = prompt("ingrese contraseña").trim().toLowerCase()
-    console.table(usuarioNuevo)
-
-    if (usuarioNuevo != false) {
-
-        usuarioNuevo.inicioSesion(email, contra)
-
-    } else {
-        console.log("no hay usuarios registrados en el sistema")
-        return false
     }
 
 }
 
+class Adminis extends Usuario {
+    constructor(nombre, apellido, email, password, rol) {
+        super(nombre, apellido, email, password, rol)
+        this.admin = rol == 1 ? true : false
+    }
+    esAdmin() {
+        this.admin === true ? console.log("Sesion iniciada como Administrador") : this.admin = false;
+    }
+}
 
+
+
+
+const usuarioNuevo = new Usuario // INSTANCIAMOS AQUI 
 
 function opcionesSesion() {
     do {
         valor = Number(prompt("que operacion queres hacer?\n 2. registrarse \n 1.Iniciar Sesion \n  0. Salir"))
         switch (valor) {
             case 2:
-                crearUsuario()
+                usuarioNuevo.crearUsuario()
+                console.table(usuarioNuevo)
+
 
                 break
             case 1:
-                iniciarSesion()
-                // usuarioAdminis.esAdmin()
+                usuarioNuevo.iniciarSesion()
+
+                usuarioAdminis.esAdmin()
                 break
             case 0:
                 console.log("gracias por usar nuestros servicios")
-                calor = 0
+
                 break
             default:
                 console.log("seleccione una opcion")
@@ -172,3 +180,4 @@ const LUX2 = new PersonajeEchizero(200, 250, 900, 200);
 
 console.log(LUX);
 console.log(LUX2); */
+
